@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 
 const Phonebook = ({ onSubmit }) => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phone, setPhone] = useState('');
   const initialValue = {
     name: '',
-    number: '',
+    phone: '',
   };
 
   const onInputChange = e => {
@@ -18,8 +18,8 @@ const Phonebook = ({ onSubmit }) => {
       case 'name':
         setName(value);
         break;
-      case 'number':
-        setNumber(value);
+      case 'phone':
+        setPhone(value);
         break;
       default:
         throw new Error(`There is no option name - ${name}`);
@@ -30,9 +30,9 @@ const Phonebook = ({ onSubmit }) => {
       <Formik
         initialValues={initialValue}
         onSubmit={() => {
-          onSubmit({ name, number });
+          onSubmit({ name, phone });
           setName('');
-          setNumber('');
+          setPhone('');
         }}
       >
         <Form>
@@ -53,11 +53,11 @@ const Phonebook = ({ onSubmit }) => {
               pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
               autoComplete="off"
               onChange={onInputChange}
-              name="number"
-              value={number}
+              name="phone"
+              value={phone}
             />
           </label>
-          <ErrorMessage name="number" />
+          <ErrorMessage name="phone" />
           <button type="submit">Add contact</button>
         </Form>
       </Formik>
