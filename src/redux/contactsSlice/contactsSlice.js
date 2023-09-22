@@ -32,7 +32,6 @@ export const contactsSlice = createSlice({
       state.items = action.payload;
     },
     [addContact.fulfilled](state, action) {
-      console.log(action);
       state.isLoading = false;
       state.items.push(action.payload);
     },
