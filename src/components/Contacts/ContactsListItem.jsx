@@ -1,28 +1,26 @@
 import { DeleteBtn, Item } from './Contacts.styled';
-// import { useDeleteContactMutation } from 'redux/contacts';
+import { useDispatch, useSelector } from 'react-redux';
+import { deleteContact } from 'redux/contactsSlice';
 import { toast } from 'react-toastify';
 
 export default function ContactsListItem({ id, name, phone }) {
-//   const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
-//   const handleDeleteContact = async id => {
-//     try {
-//       await deleteContact(id);
-//       toast.success('Contact was deleted succesfully');
-//     } catch (e) {
-//       toast.error(e.message);
-//     }
-//   };
+  const dispatch = useDispatch();
+  const isLoading = useSelector(state => state.contacts.isLoading);
+
+  const handleDeleteContact = async id => {
+    dispatch(deleteContact(id))
+  };
   return (
     <Item>
       <p>
         {name}: {phone}
       </p>
       <DeleteBtn
-        // onClick={() => handleDeleteContact(id)}
-        // disabled={isDeleting}
+        onClick={() => handleDeleteContact(id)}
+        disabled={isLoading}
         type="button"
       >
-        {/* {isDeleting ? 'Deleting' : 'Delete'} */}
+        {isLoading ? 'Deleting' : 'Delete'}
       </DeleteBtn>
     </Item>
   );
